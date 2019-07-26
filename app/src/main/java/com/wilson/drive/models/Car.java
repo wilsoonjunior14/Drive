@@ -47,4 +47,9 @@ public class Car {
     public void setTop(float top) {
         this.top = top;
     }
+
+    public float moveLeftOrRight(float value){
+        this.left += value;
+        return this.left;
+    }
 }

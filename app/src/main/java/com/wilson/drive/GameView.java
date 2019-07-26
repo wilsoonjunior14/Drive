@@ -48,6 +48,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
     public void run() {
 
         Game g = new Game(context, getWidth(), getHeight());
+        int timeEnemy = 1000;
+        int sleep     = 100;
 
         while (true){
             Canvas canvas = getHolder().lockCanvas();
@@ -65,8 +67,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback, Run
             // draw cars
             g.drawCars(canvas);
 
+            // generate enemies
+            boolean generateEnemy = Math.random() > 0.5 ? true : false;
+            if (generateEnemy && timeEnemy <= 0){
+                g.generateEnemies();
+                timeEnemy = 1000;
+            }
+
+            if (!g.playing){
+                g.drawGameOver(canvas);
+            }
+
             try {
-                Thread.sleep(5);
+                timeEnemy -= sleep;
+                Thread.sleep(sleep);
+                System.err.println(timeEnemy);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

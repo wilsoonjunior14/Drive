@@ -26,4 +26,8 @@ public class CarPlayer extends Car{
         canvas.drawBitmap(bitScaled, this.left, this.top, null);
     }
 
+    public void move(float value){
+        super.moveLeftOrRight(value);
+    }
+
 }
